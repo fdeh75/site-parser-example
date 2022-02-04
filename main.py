@@ -1,3 +1,5 @@
+from pprint import pprint
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -15,19 +17,17 @@ def get_html(url, params=None):
 
 def get_content(html):
     soup = BeautifulSoup(html, 'html.parser')
-    items = soup.find_all('section', class_='proposition  ')
+    # items = soup.find_all('section', class_='proposition  ')
+    items = soup.select('#searchResult > div > section')
 
     cars = []
     for item in items:
         cars.append({
-            'title': item.find('div', class_='na-gallery-view  list-view').get_text(tsrip=True),
-            'title': item.find('a', class_='proposition_link').get(href),
-            'title': item.find('div', class_='proposition_area').get_text(strip=True),
-            'title': item.find('h3', class_='proposition_name').get_text(strip=True),
-            'title': item.find('span', class_='link').get(section),
-            'link': HOST + item.find('a', class_='proposition_link').get(href),
+            'name': item.select_one('.proposition_name').get_text(strip=True),
+            # 'title': item.find('span', class_='link').get(section),
+            # 'link': HOST + item.find('a', class_='proposition_link').get(href),
         })
-    print(cars)
+    pprint(cars)
 
 
 def parse():
