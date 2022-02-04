@@ -23,7 +23,7 @@ def get_content(html):
     cars = []
     for item in items:
         cars.append({
-            'name': item.select_one('.proposition_nam').get_text(strip=True),
+            'name': item.select_one('.proposition_name').get_text(strip=True),
             # 'title': item.find('span', class_='link').get(section),
             # 'link': HOST + item.find('a', class_='proposition_link').get(href),
         })
